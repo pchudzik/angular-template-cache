@@ -1,6 +1,6 @@
 {
   "name": "angular-template-cache",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cli tool to put your html files into angular's $templateCache service",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/pchudzik/angular-template-cache",
   "repository": {
     "type": "git",
-    "url": "git://github.com:pchudzik/angular-template-cache.git"
+    "url": "git://github.com/pchudzik/angular-template-cache.git"
   },
   "bugs": {
     "url": "https://github.com/pchudzik/angular-template-cache/issues"
