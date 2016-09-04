@@ -71,22 +71,22 @@ const templatesModule = angular
 export default templatesModule;
 ```
   
-```--suffix```
+``` --suffix [suffix] ```
 Custom suffix to be used in code.
 Default prefix depends on ```---style``` option
  
-```--quotmark [quotmark type]```
+``` --quotmark [quotmark type] ```
 qutotation mark to use in generated code. Possible options: single|double
 single by default
  
-```---whitespace```
+``` ---whitespace [whitespace type]```
 Whitespace to use. Possible options: tabs|spaces
 tabs bt default
  
-```-h, ---help```
+``` -h, ---help ```
 prints help
  
-```-s, --style```
+``` -s, --style [style] ```
 Code style to generate. Possible options are:
 
 browser:
