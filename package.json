@@ -19,6 +19,14 @@
     "html2js"
   ],
   "author": "Pawel Chudzik",
+  "homepage": "https://github.com/pchudzik/angular-template-cache",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:pchudzik/angular-template-cache.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pchudzik/angular-template-cache/issues"
+  },
   "license": "MIT",
   "dependencies": {
     "bluebird": "3.4.6",
