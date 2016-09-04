@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "node_modules/.bin/mocha test",
-    "test:it": "node_modules/.bin/mocha test-it",
+    "test:it": "node_modules/.bin/mocha -s 1000 test-it",
     "test": "npm run test:unit && npm run test:it",
     "lint": "node_modules/.bin/jshint lib test"
   },
