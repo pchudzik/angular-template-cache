@@ -36,13 +36,13 @@ Name of the module to import in your application. 'templates' is default module 
 should skip new module creation. Will generate: ```.module('templates')```
 By default new module is created: ```.module('templates', [])```
 
-```--no-strict```
+``` --no-strict ```
 Skip ```'use strict';``` in generated file
  
-```--header [header content]```
+``` --header [header content] ```
 Custom header in the generated file. Just below use strict.
  
-```--prefix```
+``` --prefix ```
 Custom prefix to be used in code.
 When provided ```--module``` and ```--no-new-module``` options are ignored
 Default prefix depends on ```--style```
