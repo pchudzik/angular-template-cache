@@ -1,0 +1,36 @@
+{
+  "name": "angular-template-cache",
+  "version": "1.0.0",
+  "description": "cli tool to put your html files into angular's $templateCache service",
+  "main": "index.js",
+  "scripts": {
+    "test:unit": "node_modules/.bin/mocha test",
+    "test:it": "node_modules/.bin/mocha test-it",
+    "test": "npm run test:unit && npm run test:it",
+    "lint": "node_modules/.bin/jshint lib test"
+  },
+  "bin": {
+    "nghtml2js": "bin/cmd.js"
+  },
+  "keywords": [
+    "angular",
+    "ng",
+    "templatecache",
+    "html2js"
+  ],
+  "author": "Pawel Chudzik",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "3.4.6",
+    "commander": "2.9.0",
+    "glob": "7.0.6",
+    "lodash": "4.15.0"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "jshint": "2.9.3",
+    "mocha": "3.0.2",
+    "proxyquire": "1.7.10",
+    "testdouble": "1.6.1"
+  }
+}
