@@ -16,6 +16,14 @@ Usage
 
 **Command line**
 
+Usage:
+``` nghtml2js <options> ```
+
+Example:
+```
+node_modules/.bin/nghtml2js -m 'reporter.template' -s es2015 -f 'src/**/*.html' -p src/ -o src/template.js
+```
+
 Options:
 
 ```-f, --file <glob pattern>``` 
