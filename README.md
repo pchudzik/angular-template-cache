@@ -11,6 +11,7 @@ Grabs all your html files into angular $templateCache and stores them in single 
 * can be run from command line (for example as npm script)
 * can be required from another script
 * can print output to stdout or to a file
+* supports html minification
 * allows to define you own prefix and suffix
 * should generate valid js file (no more .jshintignore)
 
