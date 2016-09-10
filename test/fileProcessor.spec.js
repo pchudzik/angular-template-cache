@@ -3,29 +3,38 @@
 var defaults = require('../lib/defaults');
 
 var _ = require('lodash');
+
 var td = require('testdouble');
-var expect = require('chai').expect;
 var proxyquire = require('proxyquire');
+
+var expect = require('chai').expect;
 
 describe('fileProcessor.spec.js', function () {
 	var readFileMock;
+	var htmlMinifier;
+
 	var fileProcessor;
+
+	var anyFile = 'file1.html';
+	var anyContent = 'any file content';
 
 	beforeEach(function () {
 		readFileMock = td.function();
+		htmlMinifier = td.function();
+
 		fileProcessor = proxyquire('../lib/fileProcessor', {
-			fs: {readFile: readFileMock}
+			fs: {readFile: readFileMock},
+			'html-minifier': {minify: htmlMinifier}
 		});
 	});
 
 	it('should configure base path for files', function (done) {
-		var options = {basePath: 'path/to/'};
+		//given
 		var file = 'path/to/html/file.html';
-		td.when(readFileMock(file)).thenCallback(null, 'html');
-		var collector = fileProcessor(_.defaults(options, defaults));
+		mockFsToReturnContent(file, anyContent);
 
 		//when
-		collector([file])
+		processFiles([file], {basePath: 'path/to/'})
 
 		//then
 			.then(function (entries) {
@@ -36,11 +45,11 @@ describe('fileProcessor.spec.js', function () {
 
 	it('should read all files content', function (done) {
 		//given
-		td.when(readFileMock('file1.html')).thenCallback(null, '<b>file1</b>');
-		td.when(readFileMock('file2.html')).thenCallback(null, '<b>file2</b>');
+		mockFsToReturnContent('file1.html', '<b>file1</b>');
+		mockFsToReturnContent('file2.html', '<b>file2</b>');
 
 		//when
-		fileProcessor(defaults)(['file1.html', 'file2.html'])
+		processFiles(['file1.html', 'file2.html'])
 
 		//then
 			.then(function (entries) {
@@ -60,11 +69,11 @@ describe('fileProcessor.spec.js', function () {
 
 	it('should process all files content', function (done) {
 		//given
-		td.when(readFileMock('file1.html')).thenCallback(null, '  file1  ');
-		td.when(readFileMock('file2.html')).thenCallback(null, '  file2  ');
+		mockFsToReturnContent('file1.html', '  file1  ');
+		mockFsToReturnContent('file2.html', '  file2  ');
 
 		//when
-		fileProcessor(defaults)(['file1.html', 'file2.html'])
+		processFiles(['file1.html', 'file2.html'])
 
 		//then
 			.then(function (entries) {
@@ -82,6 +91,53 @@ describe('fileProcessor.spec.js', function () {
 			.then(done);
 	});
 
+	describe('html-minify', function () {
+		it('should pass all htmlminOptions options to htmlmin', function (done) {
+			//given
+			var htmlMinifierOptions = {
+				otherOption: '123',
+				htmlmin: true,
+				htmlminOptions: {
+					caseSensitive: false,
+					minifyURLs: true,
+					keepClosingSlash: true
+				}
+			};
+			mockFsToReturnContent(anyFile, anyContent);
+			td.when(htmlMinifier(), {ignoreExtraArgs: true}).thenReturn(anyContent);
+
+			//when
+			processFiles([anyFile], htmlMinifierOptions)
+
+			//then
+				.then(function () {
+					td.verify(htmlMinifier(anyContent, {
+						caseSensitive: false,
+						minifyURLs: true,
+						keepClosingSlash: true
+					}));
+				})
+				.then(done);
+		});
+
+		[true, false].forEach(function (htmlminOn) {
+			it('should minify html when htmlmin options is true', function (done) {
+				//given
+				mockFsToReturnContent(anyFile, anyContent);
+				td.when(htmlMinifier(), {ignoreExtraArgs: true}).thenReturn(anyContent);
+
+				//when
+				processFiles([anyFile], {htmlmin: htmlminOn})
+
+				//then
+					.then(function () {
+						td.verify(htmlMinifier(anyContent, td.matchers.anything()), {times: htmlminOn ? 1 : 0});
+					})
+					.then(done);
+			});
+		});
+	});
+
 	describe('html processing', function () {
 		[
 			{
@@ -96,16 +152,11 @@ describe('fileProcessor.spec.js', function () {
 			}]
 			.forEach(function (params) {
 				it('should use requested whitespace type ' + params.whitespace, function (done) {
-					var options = {
-						whitespace: params.whitespace
-					};
-					var collector = fileProcessor(_.defaults(options, defaults));
-
 					//given
-					td.when(readFileMock('file.html')).thenCallback(null, params.rawHtml);
+					mockFsToReturnContent(anyFile, params.rawHtml);
 
 					//when
-					collector(['file.html'])
+					processFiles([anyFile], {whitespace: params.whitespace})
 
 					//then
 						.then(function (entries) {
@@ -134,10 +185,10 @@ describe('fileProcessor.spec.js', function () {
 		].forEach(function (params) {
 			it(params.description, function (done) {
 				//given
-				td.when(readFileMock('file.html')).thenCallback(null, params.rawHtml);
+				mockFsToReturnContent(anyFile, params.rawHtml);
 
 				//when
-				fileProcessor(defaults)(['file.html'])
+				processFiles([anyFile])
 
 				//then
 					.then(function (entries) {
@@ -162,13 +213,11 @@ describe('fileProcessor.spec.js', function () {
 			}
 		].forEach(function (params) {
 			it('should fix quotmark in html', function (done) {
-				var options = {quotmark: params.quotmarkType};
-				var collector = fileProcessor(_.defaults(options, defaults));
-
-				td.when(readFileMock('file.html')).thenCallback(null, params.rawHtml);
+				//given
+				mockFsToReturnContent(anyFile, params.rawHtml);
 
 				//when
-				collector(['file.html'])
+				processFiles([anyFile], {quotmark: params.quotmarkType})
 
 				//then
 					.then(function (entries) {
@@ -177,6 +226,16 @@ describe('fileProcessor.spec.js', function () {
 					.then(done);
 			});
 		});
-
 	});
+
+	function processFiles(files, options) {
+		var initialHtmlMin = (options||{}).htmlmin;
+		var optionsToUse = _.defaults(options || {}, defaults);
+		optionsToUse.htmlmin = false || initialHtmlMin;
+		return fileProcessor(optionsToUse)(files);
+	}
+
+	function mockFsToReturnContent(file, content) {
+		td.when(readFileMock(file)).thenCallback(null, content);
+	}
 });

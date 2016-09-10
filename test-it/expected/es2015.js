@@ -7,23 +7,9 @@ import angular from 'angular';
 const templatesModule = angular
 	.module('templates', [])
 	.run(['$templateCache', function($templateCache) {
-		$templateCache.put('test-it/first.html', '<style>\n' +
-			'	p {\n' +
-			'		background: red;\n' +
-			'	}\n' +
-			'</style>\n' +
-			'\n' +
-			'<p class="custom class">\n' +
-			'	Custom file\n' +
-			'</p>');
+		$templateCache.put('test-it/first.html', '<style>p{background:red}</style><p class="custom class">Custom file</p>');
 
-		$templateCache.put('test-it/second.html', '<script>\n' +
-			'	alert(\'hello world\')\n' +
-			'</script>\n' +
-			'\n' +
-			'<div>\n' +
-			'	<b>hello</b>\n' +
-			'</div>');
+		$templateCache.put('test-it/second.html', '<script>alert("hello world")</script><div><b>hello</b></div>');
 	}
 ]);
 

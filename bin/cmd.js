@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var program = require('commander');
 var _ = require('lodash');
+
 var defaults = require('../lib/defaults');
+var parseHtmlMinOptions = require('../lib/htmlminOptionsParser');
 var html2js = require('../index');
 
 program
@@ -11,6 +15,8 @@ program
 	.option('-p, --base-path [path]', 'base path to be used in file url. Empty by default')
 	.option('-s, --style [style]', 'code type to generate [browser|browserify|es2015]. default is ' + defaults.style)
 	.option('-m, --module-name [name]', 'name of the module. [templates]', 'templates')
+
+	.option('--no-htmlmin', 'minify html', !defaults.htmlmin)
 
 	.option('--no-new-module', 'reuse existing module instead of creating new one', !defaults.newModule)
 
@@ -23,6 +29,7 @@ program
 	.option('--quotmark [quotmark]', 'quotation mark to use. [\'|"] [sing quote|double quote]. single quote by default', '\'')
 	.option('--whitespace [whitespace]', 'whitespace type. [tabs|spaces]. tabs is default.', 'tabs')
 
+	.allowUnknownOption(true)
 	.parse(process.argv);
 
 var options = _.defaults({
@@ -37,7 +44,9 @@ var options = _.defaults({
 	whitespace: program.whitespace,
 	prefix: program.prefix,
 	suffix: program.suffix,
-	files: program.files
+	files: program.files,
+	htmlmin: program.htmlmin,
+	htmlminOptions: parseHtmlMinOptions(program.rawArgs)
 }, defaults);
 
 html2js(options);

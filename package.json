@@ -32,6 +32,7 @@
     "bluebird": "3.4.6",
     "commander": "2.9.0",
     "glob": "7.0.6",
+    "html-minifier": "3.0.2",
     "lodash": "4.15.0"
   },
   "devDependencies": {
