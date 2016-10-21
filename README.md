@@ -21,17 +21,24 @@ Usage
 **Command line**
 
 Usage:
-``` nghtml2js <options> ```
+``` nghtml2js [options] -- [fileList...]```
 
-Example:
+Examples:
 ```
 node_modules/.bin/nghtml2js -m 'reporter.template' -s es2015 -f 'src/**/*.html' -p src/ -o src/template.js
+node_modules/.bin/nghtml2js -m 'reporter.template' -s es2015 -f -p src/ -o src/template.js -- src/file1.html src/file2.htm
+node_modules/.bin/nghtml2js   # will load all **html files from current folder 
 ```
 
+
 Options:
+```fileList```
+files to put in templateCache. File list must be provided after ```--```
 
 ```-f, --file <glob pattern>``` 
 Glob (https://github.com/isaacs/node-glob) pattern to find html files. To make it work in console you must put pattern in quote. Otherwise bash will break pattern
+
+When input fileList is provided and glob pattern is present then results will be merged.
 
 ```-o, --output [output file]```
 File in which output should be saved (will overwrite existing file content). Will print to console if not file provided.

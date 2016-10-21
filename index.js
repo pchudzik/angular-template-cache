@@ -6,7 +6,7 @@ var templateGenerator = require('./lib/templateGenerator');
 var resultSaver = require('./lib/resultSaver');
 
 module.exports = function html2jsProcessor(options) {
-	return fileScanner(options.files)
+	return fileScanner(options.filesGlob, options.fileList)
 		.then(fileProcessor(options))
 		.then(templateGenerator(options))
 		.then(resultSaver(options));
