@@ -15,6 +15,7 @@ program
 	.option('-p, --base-path [path]', 'base path to be used in file url. Empty by default')
 	.option('-s, --style [style]', 'code type to generate [browser|browserify|es2015]. default is ' + defaults.style)
 	.option('-m, --module-name [name]', 'name of the module. [templates]', 'templates')
+	.option('-i, --ignore-missing', 'when loading files from fileList should missing (or unreadable) files be ignored', defaults.ignoreMissing)
 
 	.option('--no-htmlmin', 'minify html', !defaults.htmlmin)
 
@@ -58,6 +59,7 @@ var options = _.defaults({
 	suffix: program.suffix,
 	filesGlob: resolveGlob(program.files, program.args),
 	fileList: program.args,
+	ignoreMissing: program.ignoreMissing,
 	htmlmin: program.htmlmin,
 	htmlminOptions: parseHtmlMinOptions(program.rawArgs)
 }, defaults);

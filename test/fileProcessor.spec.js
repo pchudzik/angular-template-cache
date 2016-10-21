@@ -49,7 +49,7 @@ describe('fileProcessor.spec.js', function () {
 		mockFsToReturnContent('file2.html', '<b>file2</b>');
 
 		//when
-		processFiles(['file1.html', 'file2.html'])
+		processFiles(['file1.html', 'file2.html'], {ignoreMissing: true})
 
 		//then
 			.then(function (entries) {
@@ -65,6 +65,33 @@ describe('fileProcessor.spec.js', function () {
 				]);
 			})
 			.then(done);
+	});
+
+	it('should ignore non existing nor readable files', function (done) {
+		//given
+		mockFsToError('file.html', 'can not read file');
+
+		//when
+		processFiles(['file.html'], {ignoreMissing: true})
+
+		//then
+			.then(function (entries) {
+				expect(entries).to.eql([]);
+			})
+			.then(done);
+	});
+
+	it('should fail when missing or readable files present', function (done) {
+		//given
+		mockFsToError('file.html', 'No such file error');
+
+		//when
+		processFiles(['file.html'], {ignoreMissing: false})
+
+			//then
+			.catch(function() {
+				done();
+			});
 	});
 
 	it('should process all files content', function (done) {
@@ -229,10 +256,14 @@ describe('fileProcessor.spec.js', function () {
 	});
 
 	function processFiles(files, options) {
-		var initialHtmlMin = (options||{}).htmlmin;
+		var initialHtmlMin = (options || {}).htmlmin;
 		var optionsToUse = _.defaults(options || {}, defaults);
 		optionsToUse.htmlmin = false || initialHtmlMin;
 		return fileProcessor(optionsToUse)(files);
+	}
+
+	function mockFsToError(file, error) {
+		td.when(readFileMock(file)).thenCallback(error);
 	}
 
 	function mockFsToReturnContent(file, content) {

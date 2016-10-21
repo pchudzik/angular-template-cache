@@ -48,6 +48,9 @@ Base path to be used in you html files put into $templateCache service.
 For example you files are in physically stored app/src/html but you serve them from app folder. 
 You can set base path to ```app/``` and paths to the files will be fixed
 
+```-i, --ignore-missing```
+Do not fail when file from fileList doesn't exist or can not be loaded. When option is active missing files will not be present in generated template file  
+
 ```-m, --module-name```
 Name of the module to import in your application. 'templates' is default module name.
 
