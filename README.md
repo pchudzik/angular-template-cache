@@ -32,7 +32,8 @@ node_modules/.bin/nghtml2js   # will load all **html files from current folder
 More examples can be found in [tests](test-it/cmd.spec.js)
 
 
-Options:
+**Options:**
+
 ``` fileList ```
 files to put in templateCache. File list must be provided after ```--```
 
