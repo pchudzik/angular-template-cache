@@ -21,7 +21,7 @@ Usage
 **Command line**
 
 Usage:
-``` nghtml2js [options] -- [fileList...]```
+``` nghtml2js [options] -- [fileList...] ```
 
 Examples:
 ```
@@ -29,16 +29,17 @@ node_modules/.bin/nghtml2js -m 'reporter.template' -s es2015 -f 'src/**/*.html' 
 node_modules/.bin/nghtml2js -m 'reporter.template' -s es2015 -f -p src/ -o src/template.js -- src/file1.html src/file2.htm
 node_modules/.bin/nghtml2js   # will load all **html files from current folder 
 ```
+More examples can be found in [tests](test-it/cmd.spec.js)
 
 
 Options:
-```fileList```
+``` fileList ```
 files to put in templateCache. File list must be provided after ```--```
 
 ```-f, --file <glob pattern>``` 
 Glob (https://github.com/isaacs/node-glob) pattern to find html files. To make it work in console you must put pattern in quote. Otherwise bash will break pattern
 
-When input fileList is provided and glob pattern is present then results will be merged.
+When input file list is provided and glob pattern is present then files found for glob pattern and input files will be merged.
 
 ```-o, --output [output file]```
 File in which output should be saved (will overwrite existing file content). Will print to console if not file provided.
@@ -217,6 +218,10 @@ export default templatesModule;
 
 Changes
 =======
+**1.2.0**
+
+* specify list of files (#3) - file list to be transofmred can be provided instead fo glob pattern
+* --ignore-missing option added. In case of file can not be read, or doesn't exists it's possible to proceed with template.js generation
 
 **1.1.0**
 
