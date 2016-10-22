@@ -86,7 +86,9 @@ describe('cmd.spec.js', function () {
 		exec('bin/cmd.js ' + cmdArgs, function (err, stdout, stderr) {
 			expect(stdout).to.eql('');
 
-			expect(stderr).to.eq('Error: ENOENT: no such file or directory, open \'non-existing.file.html\'\n');
+			expect(stderr).to.contain('ENOENT');
+			expect(stderr).to.contain('open \'non-existing.file.html\'');
+
 			expect(err.code).to.eql(1);
 
 			done();
