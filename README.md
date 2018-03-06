@@ -222,6 +222,11 @@ export default templatesModule;
 
 Changes
 =======
+**1.3.0**
+
+* added option service-type - typescript type of the AngularJS $templateCache service (thx [@lmartorella](https://github.com/lmartorella))
+* dependencies update
+
 **1.2.0**
 
 * specify list of files (#3) - file list to be transofmred can be provided instead fo glob pattern
