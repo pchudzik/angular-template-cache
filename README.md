@@ -14,6 +14,7 @@ Grabs all your html files into angular $templateCache and stores them in single 
 * supports html minification
 * allows to define you own prefix and suffix
 * should generate valid js file (no more .jshintignore)
+* has support for typescript
 
 Usage
 =====
