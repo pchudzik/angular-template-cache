@@ -29,6 +29,8 @@ program
 
 	.option('--quotmark [quotmark]', 'quotation mark to use. [\'|"] [sing quote|double quote]. single quote by default', '\'')
 	.option('--whitespace [whitespace]', 'whitespace type. [tabs|spaces]. tabs is default.', 'tabs')
+	
+	.option('--service-type [Typescript type]', 'The Typescript type of the AngularJS $templateCache service, to output file compliant with strict TS')
 
 	.allowUnknownOption(true);
 
@@ -51,6 +53,7 @@ var options = _.defaults({
 	style: program.style,
 	header: program.header,
 	moduleName: program.moduleName,
+	serviceType: program.serviceType,
 	newModule: program.newModule,
 	basePath: program.basePath,
 	qutomark: program.quotmark,

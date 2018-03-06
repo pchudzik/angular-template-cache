@@ -56,6 +56,9 @@ Do not fail when file from fileList doesn't exist or can not be loaded. When opt
 ```-m, --module-name```
 Name of the module to import in your application. 'templates' is default module name.
 
+```--service-type [service type]```
+The Typescript type of the AngularJS $templateCache service, to generate a file compliant with strict Typescript settings.
+
 ``` --no-html-min ```
 Will disable html minification (https://github.com/kangax/html-minifier).
 All Options prefixed with ```--htmlmin-``` will be passed directly to html-minifier. For example: ```--htmlmin-minifyCSS``` will be passed as ```minifyCSS``` option to html-minifier.

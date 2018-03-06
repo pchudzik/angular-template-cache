@@ -103,6 +103,30 @@ describe('templateGenerator.spec.js', function () {
 		});
 	});
 
+	it('should use provided TS type', function (done) {
+		//given
+		var options = {serviceType: 'ng.ITemplateCacheService'};
+		var generator = templateGenerator(_.defaults(options, defaults));
+
+		//when
+		generator([])
+
+		//then
+			.then(function (result) {
+				expect(result).to.eql(
+					[
+						useStrictString +
+						defaultHeaderString +
+						browserAngular +
+						defaultModuleString +
+						'\t.run([\'$templateCache\', function($templateCache: ng.ITemplateCacheService) {\n\n' +
+						browserSuffix
+					].join('')
+				);
+			})
+			.then(done);
+	});
+
 	it('should use provided module name', function (done) {
 		//given
 		var moduleName = 'my-html';
