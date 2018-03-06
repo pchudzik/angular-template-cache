@@ -29,17 +29,17 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "3.4.6",
-    "commander": "2.9.0",
-    "glob": "7.1.1",
-    "html-minifier": "3.1.0",
-    "lodash": "4.16.4"
+    "bluebird": "3.5.1",
+    "commander": "2.14.1",
+    "glob": "7.1.2",
+    "html-minifier": "3.5.10",
+    "lodash": "4.17.5"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "jshint": "2.9.4",
-    "mocha": "3.1.2",
-    "proxyquire": "1.7.10",
-    "testdouble": "1.8.0"
+    "chai": "4.1.2",
+    "jshint": "2.9.5",
+    "mocha": "3.5.3",
+    "proxyquire": "2.0.0",
+    "testdouble": "3.5.2"
   }
 }
