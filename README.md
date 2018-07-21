@@ -38,7 +38,7 @@ More examples can be found in [tests](test-it/cmd.spec.js)
 ``` fileList ```
 files to put in templateCache. File list must be provided after ```--```
 
-```-f, --file <glob pattern>``` 
+```-f, --files <glob pattern>``` 
 Glob (https://github.com/isaacs/node-glob) pattern to find html files. To make it work in console you must put pattern in quote. Otherwise bash will break pattern
 
 When input file list is provided and glob pattern is present then files found for glob pattern and input files will be merged.
@@ -46,7 +46,7 @@ When input file list is provided and glob pattern is present then files found fo
 ```-o, --output [output file]```
 File in which output should be saved (will overwrite existing file content). Will print to console if not file provided.
 
-```-p, --basepath [path]```
+```-p, --base-path [path]```
 Base path to be used in you html files put into $templateCache service.
 For example you files are in physically stored app/src/html but you serve them from app folder. 
 You can set base path to ```app/``` and paths to the files will be fixed
@@ -106,17 +106,17 @@ export default templatesModule;
   
 ``` --suffix [suffix] ```
 Custom suffix to be used in code.
-Default prefix depends on ```---style``` option
+Default prefix depends on ```--style``` option
  
 ``` --quotmark [quotmark type] ```
 qutotation mark to use in generated code. Possible options: single|double
 single by default
  
-``` ---whitespace [whitespace type]```
+``` --whitespace [whitespace type]```
 Whitespace to use. Possible options: tabs|spaces
 tabs bt default
  
-``` -h, ---help ```
+``` -h, --help ```
 prints help
  
 ``` -s, --style [style] ```
