@@ -223,6 +223,11 @@ export default templatesModule;
 
 Changes
 =======
+**1.3.1**
+
+* Readme updateds (thx [@Brent Douglas](https://github.com/BrentDouglas))
+* dependencies update
+
 **1.3.0**
 
 * added option service-type - typescript type of the AngularJS $templateCache service (thx [@lmartorella](https://github.com/lmartorella))

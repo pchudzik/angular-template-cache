@@ -40,6 +40,6 @@
     "jshint": "2.9.5",
     "mocha": "3.5.3",
     "proxyquire": "2.0.1",
-    "testdouble": "3.8.1"
+    "testdouble": "3.7.0"
   }
 }
