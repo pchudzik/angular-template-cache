@@ -13,7 +13,7 @@ program
 	.option('-f, --files [filesGlobPattern]', 'glob pattern to locate files. Quote it to make it work in bash')
 	.option('-o, --output [file]', 'output file. stdout when missing. default stdout')
 	.option('-p, --base-path [path]', 'base path to be used in file url. Empty by default')
-	.option('-s, --style [style]', 'code type to generate [browser|browserify|es2015]. default is ' + defaults.style)
+	.option('-s, --style [style]', 'code type to generate [browser|browserify|es2015|typescript]. default is ' + defaults.style)
 	.option('-m, --module-name [name]', 'name of the module. [templates]', 'templates')
 	.option('-i, --ignore-missing', 'when loading files from fileList should missing (or unreadable) files be ignored', defaults.ignoreMissing)
 
