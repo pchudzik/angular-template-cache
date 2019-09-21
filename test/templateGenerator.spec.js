@@ -13,11 +13,13 @@ describe('templateGenerator.spec.js', function () {
 	var browserAngular = 'angular\n';
 	var browserifyAngular = 'var templatesModule = require(\'angular\')\n';
 	var es2015Angular = 'import angular from \'angular\';\n\nconst templatesModule = angular\n';
+	var typescriptAngular = 'import * as angular from \'angular\';\n\nexport const templatesModule = angular\n';
 	var defaultModuleString = '\t.module(\'templates\', [])\n';
 	var defaultRunString = '\t.run([\'$templateCache\', function($templateCache) {\n';
 	var browserSuffix = '\t}\n]);\n';
 	var browserifySuffix = '\t}\n]);\n\nmodule.exports = templatesModule;\n';
 	var es2015Suffix = '\t}\n]);\n\nexport default templatesModule;\n';
+	var typescriptSuffix = '\t}\n]);\n';
 
 	it('should wrap all entries in template', function (done) {
 		//given
@@ -176,7 +178,8 @@ describe('templateGenerator.spec.js', function () {
 	[
 		{type: 'browser', expectedPrefix: browserAngular, expectedSuffix: browserSuffix},
 		{type: 'browserify', expectedPrefix: browserifyAngular, expectedSuffix: browserifySuffix},
-		{type: 'es2015', expectedPrefix: es2015Angular, expectedSuffix: es2015Suffix}
+		{type: 'es2015', expectedPrefix: es2015Angular, expectedSuffix: es2015Suffix},
+		{type: 'typescript', expectedPrefix: typescriptAngular, expectedSuffix: typescriptSuffix}
 	].forEach(function (params) {
 		it('should use code type for ' + params.type, function (done) {
 			//given

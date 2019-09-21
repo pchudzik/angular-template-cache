@@ -6,7 +6,7 @@ var fs = require('fs');
 var expect = require('chai').expect;
 
 describe('cmd.spec.js', function () {
-	['browser', 'es2015', 'browserify'].forEach(function (style) {
+	['browser', 'es2015', 'browserify', 'typescript'].forEach(function (style) {
 		it('should generate files using ' + style + ' style', function (done) {
 			var cmdArgs = [
 				'-f "test-it/**html"',
