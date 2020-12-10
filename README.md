@@ -223,6 +223,9 @@ export default templatesModule;
 
 Changes
 =======
+**1.3.3**
+* Lodash bump
+
 **1.3.2**
 * Removed security warnings from npm audit (thx [@Ersel Aker](https://github.com/ersel))
 * Dropped support for nodejs 0.12 and 4.x

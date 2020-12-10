@@ -1,6 +1,6 @@
 {
   "name": "angular-template-cache",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "cli tool to put your html files into angular's $templateCache service",
   "main": "index.js",
   "scripts": {
