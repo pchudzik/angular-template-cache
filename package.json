@@ -33,7 +33,7 @@
     "commander": "2.19.0",
     "glob": "7.1.6",
     "html-minifier": "3.5.21",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "chai": "4.2.0",
